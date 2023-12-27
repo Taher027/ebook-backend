@@ -1,14 +1,16 @@
-import httpStatus from "http-status";
-import ApiError from "../../errors/ApiError";
-import { bookSearchableFields } from "./book.constant";
-import { IBook, IBookFilters } from "./book.interface";
+import { IBook } from "./book.interface";
 import Book from "./book.model";
+import { IBookFilters } from "./book.interface"
+import { bookSearchableFields } from "./book.constants";
+import ApiError from "../../../errors/ApiError";
+import { ObjectId } from "mongoose";
+
 
 const addNewBook = async (payload: IBook): Promise<IBook | null> => {
-    const result = await Book.create(payload);
-    return result;
-  };
-  const getAllBooks = async ( filters: IBookFilters): Promise<IBook[] | null> => {
+  const result = await Book.create(payload);
+  return result;
+};
+const getAllBooks = async ( filters: IBookFilters): Promise<IBook[] | null> => {
 
     const { searchTerm, genre, publicationDate } = filters
     const andConditions = [];
@@ -47,44 +49,43 @@ const addNewBook = async (payload: IBook): Promise<IBook | null> => {
   return result;
 };
 const getSingleBook = async (payload: string): Promise<IBook | null> => {
-    const result = await Book.findById(payload);
-    return result;
+  const result = await Book.findById(payload);
+  return result;
 };
 
 const updateBook = async (
-    id: string,
-    payload: Partial<IBook>
-  ): Promise<IBook | null> => {
-  
-    const bookInfo = await Book.findById(id);
-  
-    if(bookInfo?.addedBy.toString() !== payload.addedBy){
-      throw new ApiError(httpStatus.UNAUTHORIZED, "Unauthorized request");
-    }
-  
-    const result = await Book.findOneAndUpdate({ _id: id }, payload, {
-      new: true,
-    });
-    return result;
+  id: string,
+  payload: Partial<IBook>
+): Promise<IBook | null> => {
+
+  const bookInfo = await Book.findById(id);
+
+  if(bookInfo?.addedBy.toString() !== payload.addedBy){
+    throw new ApiError(401, "Unauthorized request");
+  }
+
+  const result = await Book.findOneAndUpdate({ _id: id }, payload, {
+    new: true,
+  });
+  return result;
 };
 
-const deleteBook = async (id:string, userId:string): Promise< null | IBook> =>{
-    const bookInfo = await Book.findById(id);
-    const addedBy = bookInfo?.addedBy.toString();
-    if(addedBy !== userId){
-        throw new ApiError(httpStatus.UNAUTHORIZED, "Unauthorized request");
-    }
+const deleteBook = async (id:string, userId:string): Promise<IBook | null> => {
 
-    const result = await Book.findByIdAndDelete(id);
-    return result;
-}
+  const bookInfo = await Book.findById(id);
 
+  if(bookInfo?.addedBy.toString() !== userId){
+    throw new ApiError(401, "Unauthorized request");
+  }
 
+  const result = await Book.findByIdAndDelete(id);
+  return result;
+};
 
 export const BookService = {
-    addNewBook,
-    getAllBooks,
-    getSingleBook,
-    updateBook,
-    deleteBook
-}
+  addNewBook,
+  getAllBooks,
+  getSingleBook,
+  updateBook,
+  deleteBook,
+};

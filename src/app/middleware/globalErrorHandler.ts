@@ -1,44 +1,35 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-console */
 /* eslint-disable no-unused-expressions */
 import { ErrorRequestHandler, NextFunction, Request, Response } from 'express';
 import config from '../../config';
-import ApiError from '../errors/ApiError';
-import handleValidationError from '../errors/handleValidationError';
-
-import { ZodError } from 'zod';
-import handleCastError from '../errors/handleCastError';
-import handleZodError from '../errors/handleZodError';
-import { errorlogger } from '../shared/logger';
-import { IGenericErrorMessage } from '../interface/error';
+import ApiError from '../../errors/ApiError';
+import { IGenericErrorMessage } from '../../interface/error';
+import handleCastError from '../../errors/handleCastError';
+import handleDuplicateError from './handleDuplicateError';
 
 const globalErrorHandler: ErrorRequestHandler = (
   error,
   req: Request,
   res: Response,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  next: NextFunction,
+  next: NextFunction
 ) => {
   config.env === 'development'
-    ? console.log(`🐱‍🏍 globalErrorHandler ~~`, { error })
-    : errorlogger.error(`🐱‍🏍 globalErrorHandler ~~`, error);
-
+    ? console.log(`globalErrorHandler ~~`, error)
+    : console.log(`globalErrorHandler ~~`, error);
+  console.log(error, 'hello world');
   let statusCode = 500;
-  let message = 'Something went wrong !';
+  let message = 'Something went wrong!';
   let errorMessages: IGenericErrorMessage[] = [];
-
-  if (error?.name === 'ValidationError') {
-    const simplifiedError = handleValidationError(error);
-    statusCode = simplifiedError.statusCode;
-    message = simplifiedError.message;
-    errorMessages = simplifiedError.errorMessages;
-  } else if (error instanceof ZodError) {
-    const simplifiedError = handleZodError(error);
-    statusCode = simplifiedError.statusCode;
-    message = simplifiedError.message;
-    errorMessages = simplifiedError.errorMessages;
-  } else if (error?.name === 'CastError') {
+    if(error?.name === 'CastError') {
     const simplifiedError = handleCastError(error);
+
+    statusCode = simplifiedError.statusCode;
+    message = simplifiedError.message;
+    errorMessages = simplifiedError.errorMessages;
+  } else if (error.code === 11000 && error.keyPattern && error.keyValue) {
+    const simplifiedError = handleDuplicateError(error);
     statusCode = simplifiedError.statusCode;
     message = simplifiedError.message;
     errorMessages = simplifiedError.errorMessages;
