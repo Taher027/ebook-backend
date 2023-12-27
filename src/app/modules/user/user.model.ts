@@ -18,8 +18,6 @@ const userSchema = new Schema<IUser>(
     required: true,
     unique: true
    },
-   wishlist:  [{ type: Schema.Types.ObjectId, ref: 'Book' }],
-   readingList: [{ type: Schema.Types.ObjectId, ref: 'Book' }],
    finished: [{ type: Schema.Types.ObjectId, ref: 'Book' }],
   },
   {
