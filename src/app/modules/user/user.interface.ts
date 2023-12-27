@@ -7,8 +7,6 @@ export type IUser = {
   userId: string;
   username: string;
   wishlist: Array<Types.ObjectId | IBook>;
-  readingList: Array<Types.ObjectId | IBook>;
-  finished: Array<Types.ObjectId | IBook>;
 };
 
 export type UserModel = Model<IUser, Record<string, unknown>>;
