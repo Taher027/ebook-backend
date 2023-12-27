@@ -14,6 +14,11 @@
             "date": 1703653624848,
             "name": "E:\\complete project\\ebook\\ebook-backend\\logs\\winston\\errors\\ebook-2023-27-12-11-error.log",
             "hash": "86c972960ec959930eb51b3d2cbedae9406430c7bd8fe54fcdab008bb08e849e"
+        },
+        {
+            "date": 1703680714963,
+            "name": "E:\\complete project\\ebook\\ebook-backend\\logs\\winston\\errors\\ebook-2023-27-12-18-error.log",
+            "hash": "f2bad2400fff5df8325625a990fe77f23ddc94bb78f3e4889e25d7380f773de1"
         }
     ],
     "hashType": "sha256"
