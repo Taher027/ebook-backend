@@ -15,8 +15,18 @@ const createUser = async (payload: IUser): Promise<IUser | null> => {
     return result;
   };
 
+  const getUserWishlist = async (payload: string) => {
+    const result = await User.findOne({userId: payload},{wishlist: 1}).populate('wishlist');
+    return result;
+  };
+  const getUserReadingList = async (payload: string) => {
+    const result = await User.findOne({userId: payload},{readingList:1}).populate('readingList');
+    return result;
+  };
   export const UserService = {
     createUser,
     getAllUsers,
-    getSingleUser
+    getSingleUser,
+    getUserWishlist,
+    getUserReadingList
   }

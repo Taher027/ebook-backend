@@ -44,9 +44,39 @@ const getSingleUser = catchAsync(
     });
   }
 );
+const getUserWishlist = catchAsync(
+  async (req: Request, res: Response): Promise<void> => {
+    const { id } = req.params;
+
+    const result = await UserService.getUserWishlist(id);
+
+    sendResponse(res, {
+      success: true,
+      statusCode: 200,
+      message: "User retrieved successfully",
+      data: result,
+    });
+  }
+);
+const getUserReadingList = catchAsync(
+  async (req: Request, res: Response): Promise<void> => {
+    const { id } = req.params;
+
+    const result = await UserService.getUserReadingList(id);
+
+    sendResponse(res, {
+      success: true,
+      statusCode: 200,
+      message: "User retrieved successfully",
+      data: result,
+    });
+  }
+);
 
   export const UserController = {
     createUser,
     getAllUsers,
-    getSingleUser
+    getSingleUser,
+    getUserWishlist,
+    getUserReadingList
   }
