@@ -23,10 +23,26 @@ const createUser = async (payload: IUser): Promise<IUser | null> => {
     const result = await User.findOne({userId: payload},{readingList:1}).populate('readingList');
     return result;
   };
+  const updateUser = async (
+    id: string,
+    payload: Partial<IUser>
+  ): Promise<IUser | null> => {
+    const result = await User.findOneAndUpdate({ _id: id }, payload, {
+      new: true,
+    });
+    return result;
+  };
+  
+  const deleteUser = async (payload: string)=> {
+    const result = await User.findByIdAndDelete(payload);
+    return result;
+  };
   export const UserService = {
     createUser,
     getAllUsers,
     getSingleUser,
     getUserWishlist,
-    getUserReadingList
+    getUserReadingList,
+    updateUser,
+    deleteUser
   }

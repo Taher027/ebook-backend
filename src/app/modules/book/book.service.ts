@@ -70,7 +70,7 @@ const updateBook = async (
   return result;
 };
 
-const deleteBook = async (id:string, userId:string): Promise<IBook | null> => {
+const deleteBook = async (id:string, userId:string)=> {
   console.log(id);
 
   const bookInfo = await Book.findById(id);

@@ -72,11 +72,42 @@ const getUserReadingList = catchAsync(
     });
   }
 );
+const updateUser = catchAsync(
+  async (req: Request, res: Response): Promise<void> => {
+    const user = req.body;
+    console.log(user);
+    const { id } = req.params;
+    const result = await UserService.updateUser(id, user);
+
+    sendResponse<IUser>(res, {
+      success: true,
+      statusCode: 200,
+      message: "User updated afdsaadfs successfully",
+      data: result,
+    });
+  }
+);
+const deleteUser = catchAsync(
+  async (req: Request, res: Response): Promise<void> => {
+    const { id } = req.params;
+
+    const result = await UserService.deleteUser(id);
+
+    sendResponse<IUser>(res, {
+      success: true,
+      statusCode: 200,
+      message: "Uers deleted successfully",
+      data: result,
+    });
+  }
+);
 
   export const UserController = {
     createUser,
     getAllUsers,
     getSingleUser,
     getUserWishlist,
-    getUserReadingList
+    getUserReadingList,
+    updateUser,
+    deleteUser
   }
