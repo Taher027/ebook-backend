@@ -1,3 +1,4 @@
+import { IBook } from "../book/book.interface";
 import { IUser } from "./user.interface";
 import User from "./user.model";
 
@@ -33,7 +34,7 @@ const createUser = async (payload: IUser): Promise<IUser | null> => {
     return result;
   };
   
-  const deleteUser = async (payload: string)=> {
+  const deleteUser = async (payload: string) => {
     const result = await User.findByIdAndDelete(payload);
     return result;
   };

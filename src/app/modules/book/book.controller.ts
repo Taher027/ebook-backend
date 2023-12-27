@@ -75,12 +75,13 @@ const deleteBook = catchAsync(
     console.log('id:',id, 'userId from query',userId);
 
     const result = await BookService.deleteBook(id, userId as string);
+    console.log(result,'controller');
 
     sendResponse(res, {
       success: true,
       statusCode: httpStatus.OK,
       message: 'Book deleted successfully',
-      data: "result",
+      data: result,
     });
   }
 );

@@ -4,6 +4,7 @@ import { IBookFilters } from "./book.interface"
 import { bookSearchableFields } from "./book.constants";
 import ApiError from "../../../errors/ApiError";
 import { ObjectId } from "mongoose";
+import httpStatus from "http-status";
 
 
 const addNewBook = async (payload: IBook): Promise<IBook | null> => {
@@ -61,7 +62,7 @@ const updateBook = async (
   const bookInfo = await Book.findById(id);
 
   if(bookInfo?.addedBy.toString() !== payload.addedBy){
-    throw new ApiError(401, "Unauthorized request");
+    throw new ApiError((httpStatus.UNAUTHORIZED, "Unauthorized request"));
   }
 
   const result = await Book.findOneAndUpdate({ _id: id }, payload, {
@@ -76,12 +77,12 @@ const deleteBook = async (id:string, userId:string)=> {
   const bookInfo = await Book.findById(id);
   console.log(bookInfo);
 
-  // if(bookInfo?.addedBy.toString() !== userId){
-  //   throw new ApiError(401, "Unauthorized request");
-  // }
+  if(bookInfo?.addedBy.toString() !== userId){
+    throw new ApiError(httpStatus.UNAUTHORIZED, "Unauthorized request");
+  }
 
   const result = await Book.findByIdAndDelete(id);
-  console.log(result, 'from service');
+  console.log(result, 'from bookservice reulst');
   return result;
 };
 
