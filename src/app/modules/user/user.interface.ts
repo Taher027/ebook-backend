@@ -1,5 +1,5 @@
 import { Model, Types } from 'mongoose';
-import { IBook } from '../book.interface';
+import { IBook } from '../book/book.interface';
 
 
 export type IUser = {
