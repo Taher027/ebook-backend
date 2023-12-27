@@ -1,0 +1,20 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "E:\\complete project\\ebook\\ebook-backend\\logs\\winston\\success\\.a3d9de7a41e92f59bf9f53ef83c92444902dcdc1-audit.json",
+    "files": [
+        {
+            "date": 1703650966593,
+            "name": "E:\\complete project\\ebook\\ebook-backend\\logs\\winston\\success\\ebook-2023-27-12-10-success.log",
+            "hash": "79aa55abd197b78e1b6af9a88ba820483f385d7d88df818303c5c1d3a2b8ade3"
+        },
+        {
+            "date": 1703653624835,
+            "name": "E:\\complete project\\ebook\\ebook-backend\\logs\\winston\\success\\ebook-2023-27-12-11-success.log",
+            "hash": "a49dc98af6f044918ca9591a29c68b1c62542ba436930e5ee696da8dfd360f3b"
+        }
+    ],
+    "hashType": "sha256"
+}
