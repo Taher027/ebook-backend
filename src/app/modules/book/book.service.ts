@@ -71,14 +71,17 @@ const updateBook = async (
 };
 
 const deleteBook = async (id:string, userId:string): Promise<IBook | null> => {
+  console.log(id);
 
   const bookInfo = await Book.findById(id);
+  console.log(bookInfo);
 
-  if(bookInfo?.addedBy.toString() !== userId){
-    throw new ApiError(401, "Unauthorized request");
-  }
+  // if(bookInfo?.addedBy.toString() !== userId){
+  //   throw new ApiError(401, "Unauthorized request");
+  // }
 
   const result = await Book.findByIdAndDelete(id);
+  console.log(result, 'from service');
   return result;
 };
 

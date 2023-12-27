@@ -5,6 +5,7 @@ import { BookService } from './book.service';
 import sendResponse from '../../../shared/sendResponse';
 import { IBook } from './book.interface';
 import pick from '../../../shared/pick';
+import httpStatus from 'http-status';
 
 const addNewBook = catchAsync(
   async (req: Request, res: Response): Promise<void> => {
@@ -14,7 +15,7 @@ const addNewBook = catchAsync(
 
     sendResponse<IBook>(res, {
       success: true,
-      statusCode: 200,
+      statusCode: httpStatus.OK,
       message: 'Book created successfully',
       data: result,
     });
@@ -43,7 +44,7 @@ const getSingleBook = catchAsync(
 
     sendResponse<IBook>(res, {
       success: true,
-      statusCode: 200,
+      statusCode: httpStatus.OK,
       message: 'Book retrieved successfully',
       data: result,
     });
@@ -59,7 +60,7 @@ const updateBook = catchAsync(
 
     sendResponse<IBook>(res, {
       success: true,
-      statusCode: 200,
+      statusCode: httpStatus.OK,
       message: 'Book updated successfully',
       data: result,
     });
@@ -69,13 +70,15 @@ const updateBook = catchAsync(
 const deleteBook = catchAsync(
   async (req: Request, res: Response): Promise<void> => {
     const { id } = req.params;
+    
     const { userId } = req.query
+    console.log('id:',id, 'userId from query',userId);
 
     const result = await BookService.deleteBook(id, userId as string);
 
     sendResponse(res, {
       success: true,
-      statusCode: 200,
+      statusCode: httpStatus.OK,
       message: 'Book deleted successfully',
       data: "result",
     });

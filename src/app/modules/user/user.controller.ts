@@ -18,6 +18,18 @@ const createUser = catchAsync(
       });
     }
 );
+const getAllUsers = catchAsync(
+  async (req: Request, res: Response): Promise<void> => {
+    const result = await UserService.getAllUsers();
+
+    sendResponse<IUser[]>(res, {
+      success: true,
+      statusCode: 200,
+      message: "Users retrieved successfully",
+      data: result,
+    });
+  }
+);
 const getSingleUser = catchAsync(
   async (req: Request, res: Response): Promise<void> => {
     const { id } = req.params;
@@ -35,5 +47,6 @@ const getSingleUser = catchAsync(
 
   export const UserController = {
     createUser,
+    getAllUsers,
     getSingleUser
   }
