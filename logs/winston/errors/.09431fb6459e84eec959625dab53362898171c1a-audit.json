@@ -19,6 +19,16 @@
             "date": 1703680714963,
             "name": "E:\\complete project\\ebook\\ebook-backend\\logs\\winston\\errors\\ebook-2023-27-12-18-error.log",
             "hash": "f2bad2400fff5df8325625a990fe77f23ddc94bb78f3e4889e25d7380f773de1"
+        },
+        {
+            "date": 1703684941579,
+            "name": "E:\\complete project\\ebook\\ebook-backend\\logs\\winston\\errors\\ebook-2023-27-12-19-error.log",
+            "hash": "69115dba5905c166bc4964183cb5acb11ecf10dd2950bf8157bb2ffda9ac136d"
+        },
+        {
+            "date": 1703685637992,
+            "name": "E:\\complete project\\ebook\\ebook-backend\\logs\\winston\\errors\\ebook-2023-27-12-20-error.log",
+            "hash": "7bebd1ded082679cb1c3df59950ecb88c409c841f1d4c40304ed94248af840f3"
         }
     ],
     "hashType": "sha256"

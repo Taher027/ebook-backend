@@ -62,7 +62,7 @@ const updateBook = async (
   const bookInfo = await Book.findById(id);
 
   if(bookInfo?.addedBy.toString() !== payload.addedBy){
-    throw new ApiError((httpStatus.UNAUTHORIZED, "Unauthorized request"));
+    throw new ApiError(401, "Unauthorized Access")
   }
 
   const result = await Book.findOneAndUpdate({ _id: id }, payload, {
@@ -78,7 +78,7 @@ const deleteBook = async (id:string, userId:string)=> {
   console.log(bookInfo);
 
   if(bookInfo?.addedBy.toString() !== userId){
-    throw new ApiError(httpStatus.UNAUTHORIZED, "Unauthorized request");
+    throw new ApiError(401, "Unauthorized Access")
   }
 
   const result = await Book.findByIdAndDelete(id);

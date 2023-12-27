@@ -2,7 +2,6 @@ import mongoose from "mongoose";
 import { Server } from 'http';
 import app from "./app";
 import config from "./config";
-import { errorlogger } from "./shared/logger";
 let server: Server;
 async function dbConnected() {
 	await mongoose.connect(config.database_url as string);
@@ -18,7 +17,6 @@ async function dbConnected() {
 	process.on('unhandledRejection', error => {
 		if (server) {
 		  server.close(() => {
-			errorlogger.error(error);
 			process.exit(1);
 		  });
 		} else {

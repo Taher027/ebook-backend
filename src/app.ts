@@ -1,4 +1,4 @@
-import express, { Application, NextFunction, Request, Response } from 'express';
+import express, { Application, NextFunction, Request, Response, request } from 'express';
 import cors from 'cors';
 import httpStatus from 'http-status';
 import routes from "./app/routes"
@@ -14,6 +14,9 @@ app.use(express.urlencoded({ extended: true }));
 
 // router
 app.use('/api/v1', routes);
+app.get("/",async(req:Request, res:Response)=>{
+  res.status(200).send({status:'sucess', message:"Api running"})
+})
 
 //global error handler
 app.use(globalErrorHandler)

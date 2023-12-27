@@ -1,0 +1,27 @@
+///// api convensition//////
+
+api/v1/auth
+== /signup   craete user
+== /login/:id get user
+
+
+api/v1/users
+== /:id - delete user
+== /:id/wishlist  get wishlist
+==/:id/readinglist get readinglist
+== / get all user
+
+
+api/v1/books
+
+== /add-book  -post 
+==/:id  get single book
+== /edit-book/:id update book
+== /:id delete book 
+== / get all books
+
+
+api/v1/reviews
+
+== /add-new add review
+== /:bookId get all review
