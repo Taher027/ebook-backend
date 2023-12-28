@@ -1,4 +1,4 @@
-///// api convensition//////
+///// api convention//////
 
 api/v1/auth
 == /signup   craete user
